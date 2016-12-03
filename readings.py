@@ -4,7 +4,7 @@ import pandas as pd
 import datetime
 adc = Adafruit_ADS1x15.ADS1115()
 GAIN = 1
-filename ="november_18.txt"
+filename ="november_22.txt"
 target = open(filename, 'w')
 def timezone(date):
 	day = date.day
