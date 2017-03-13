@@ -27,7 +27,7 @@ y = np.array(y)
 C=0
 gamma=0
 max_accuracy = 0
-while C <= 10000 && gamma <= 10000:
+while C <= 10000 and gamma <= 10000:
     svm = svm.SVC(kernel=linear, C=C, gamma=gamma)
     svm.fit(X,y)
     accuracy = svm.score(X,y)
