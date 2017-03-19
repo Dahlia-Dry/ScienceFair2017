@@ -6,9 +6,14 @@ import Adafruit_ADS1x15
 import datetime
 import Adafruit_BMP.BMP085  #for an older sensor, but can still control the BMP180
 adc = Adafruit_ADS1x15.ADS1115()
+<<<<<<< HEAD
+GAIN = 1
+filename ="december_2.txt"
+=======
 bmp = Adafruit_BMP.BMP085(busnum=2) #bus 1 is already occupied by 
 GAIN = 1                            #wind vane readings
 filename ="november_15.txt"
+>>>>>>> 9d1403e8a3c2fca70534af51115eeb3b026c2d65
 target = open(filename, 'w')
 a=  datetime.datetime.now()
 time = str(a)
