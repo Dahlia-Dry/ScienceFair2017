@@ -1,32 +1,41 @@
-import time
+#Author Dahlia Dry
+#Version 1.4
+#Last Modified 11/8/16
+#This program collects data from the sensors and writes it to a csv file.
 import Adafruit_ADS1x15
-import pandas as pd
 import datetime
+import Adafruit_BMP.BMP085  #for an older sensor, but can still control the BMP180
 adc = Adafruit_ADS1x15.ADS1115()
+<<<<<<< HEAD
 GAIN = 1
 filename ="december_2.txt"
+=======
+bmp = Adafruit_BMP.BMP085(busnum=2) #bus 1 is already occupied by 
+GAIN = 1                            #wind vane readings
+filename ="november_15.txt"
+>>>>>>> 9d1403e8a3c2fca70534af51115eeb3b026c2d65
 target = open(filename, 'w')
-def timezone(date):
-	day = date.day
-	day = day - 1
-	y = date.hour
-	y = y + 7
-	value = "%s-%s-%s %s:%s:%s" %(date.year, date.month, day, y, date.minute, date.second)
-	return value
-while True:
-	total = 0
-	avg = 0
+a=  datetime.datetime.now()
+time = str(a)
+while time != "11/27/16 9:00:00":
+	total_direction = 0
+	total_temp = 0
 	a = datetime.datetime.now()
-	b = timezone(a)
-	for i in range(1,20):
-		x = adc.read_adc(0, gain=GAIN)
-		total = total + x
-		avg = total / 20
-	t =str(b)
-	data = str(avg)
-	target.write(t)
+	for i in range(1,20):  #take average ADC value so you don't get outlier signals
+		direction = adc.read_adc(0, gain=GAIN) 
+		total_direction = total_direction + direction
+		temp = bmp.readTemperature()
+		total_temp = total_temp + temp
+	avg_direction = total / 20
+	avg_temp = total / 20
+	time =str(a)
+	wind_direction = str(avg_direction)
+	temperature = str(avg_temp)
+	target.write(time)
 	target.write(",")
-	target.write(data)
+	target.write(wind_direction)
+	target.write(",")
+	target.write(temperature)
 	target.write("\n")
 	time.sleep(60)
 
